@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Кәусар-Бұлақ – Валентинка күні</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+    background: url('photo_2025-02-07_21-43-41.jpg') no-repeat center center fixed;
+    background-size: cover;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+    overflow: hidden;
+    position: relative;
+}
+
+
+        .container {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            animation: fadeIn 1.5s ease-in-out;
+        }
+
+        h1 {
+            color: #d6336c;
+            font-size: 2rem;
+            font-weight: 600;
+            animation: pulse 2s infinite;
+        }
+
+        p {
+            color: #333;
+            font-size: 1rem;
+            margin-top: 10px;
+            line-height: 1.5;
+            font-weight: 400;
+        }
+
+        .rules {
+            text-align: left;
+            margin-top: 15px;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.9);
+            border-left: 5px solid #d6336c;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 500;
+        }
+
+        .timer {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #d6336c;
+            margin-top: 10px;
+        }
+
+        .button {
+            background: #d6336c;
+            color: white;
+            padding: 12px 25px;
+            border-radius: 8px;
+            margin-top: 20px;
+            display: inline-block;
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: 0.3s;
+            border: none;
+        }
+
+        .button:hover { background: #b02552; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        /* Қар эффекті */
+        .snowflake {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: white;
+            opacity: 0.7;
+            border-radius: 50%;
+            top: -10px;
+            animation: snowfall linear infinite;
+        }
+
+        @keyframes snowfall {
+            0% { transform: translateY(0); opacity: 1; }
+            100% { transform: translateY(100vh); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>💌 Кәусар-Бұлақ мектебі 💌</h1>
+        <p>Құрметті оқушылар! 14 ақпан – махаббат пен достық мерекесі! ❤️</p>
+        <p>📅 Ашық хаттар қабылдау мерзімі: <strong>8-13 ақпан</strong></p>
+        <p>💖 Ұнататын адамыңызға немесе досыңызға хат жолдаңыз!</p>
+
+        <div class="rules">
+            <p>Сіз арнайы өзіңізге ұнайтын адамыңызға, сезіміңізді білдіріп, хат жазып жібере аласыз және оның есімін, сыныбын толық жазуыңыз керек.  
+            (<b>Хатыңызды безендіріп қойсаңыз болады</b>). 14-ші ақпан күні бұл хаттарды парламент мүшелері тарататын болады.</p>
+        </div>
+
+        <div class="timer" id="timer">Уақыт саналып жатыр...</div>
+        
+        <button class="button" onclick="showMessage()">💌 Хат жазу</button>
+    </div>
+
+    <script>
+        function countdown() {
+            const eventDate = new Date("February 14, 2025 00:00:00").getTime();
+
+            function updateTimer() {
+                const now = new Date().getTime();
+                const distance = eventDate - now;
+
+                if (distance < 0) {
+                    document.getElementById("timer").innerHTML = "💖 Бүгін Валентинка күні!";
+                    return;
+                }
+
+                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                document.getElementById("timer").innerHTML = `💖 Қалған уақыт: ${days} күн, ${hours} сағ, ${minutes} мин, ${seconds} сек`;
+
+                requestAnimationFrame(updateTimer);
+            }
+
+            updateTimer();
+        }
+
+        countdown();
+
+        function showMessage() {
+            alert("💌 Хатты жазып, арнайы қорапқа салыныз!");
+        }
+
+        function createSnowflake() {
+            const snowflake = document.createElement("div");
+            snowflake.classList.add("snowflake");
+            snowflake.style.left = Math.random() * 100 + "vw";
+            snowflake.style.animationDuration = Math.random() * 5 + 3 + "s";
+            document.body.appendChild(snowflake);
+            
+            setTimeout(() => { snowflake.remove(); }, 8000);
+        }
+
+        setInterval(createSnowflake, 300);
+    </script>
+</body>
+</html>
